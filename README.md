@@ -8,4 +8,3 @@ TABLE OF CONTENTS
 
 · Additional technical specifications
 
-· Evaluation grid
