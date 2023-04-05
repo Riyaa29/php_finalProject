@@ -1,6 +1,7 @@
 <?php
 
 function initialize_session() {
+    
     // connect to the database
     $conn = mysqli_connect("localhost", "root", "", "kidsGames");
 
@@ -15,13 +16,19 @@ function initialize_session() {
     $result = mysqli_query($conn, $sql);
 
     // check if the query execution was successful
-    if (!$result) {
+    if ($result === false) {
         die("Query failed: " . mysqli_error($conn));
     }
 
-    // fetch the results and store them in the session
-    $row = mysqli_fetch_assoc($result);
-    $_SESSION['numLives'] = $row['numLives'];
+    // check if the result set contains any rows
+    if (mysqli_num_rows($result) > 0) {
+        // fetch the results and store them in the session
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['numLives'] = $row['numLives'];
+    } else {
+        // set the default number of lives to 6
+        $_SESSION['numLives'] = 6;
+    }
 
     // close the database connection
     mysqli_close($conn);
@@ -29,7 +36,8 @@ function initialize_session() {
 
 
 
-function update_lives($username, $numLives) {
+function update_lives($username, $numLives)
+{
     // connect to the database
     $conn = mysqli_connect("localhost", "root", "", "kidsGames");
 
@@ -38,47 +46,61 @@ function update_lives($username, $numLives) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // update the user's number of lives in the database
-    $sql = "UPDATE player SET numLives = $numLives WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    // check if the update was successful
-    if (!$result) {
-        die("Update failed: " . mysqli_error($conn));
+    // check if the number of lives is less than zero
+    if ($numLives < 0) {
+        $numLives = 0;
     }
+
+    // check if the number of lives is greater than 6
+    if ($numLives > 6) {
+        $numLives = 6;
+    }
+
+    // update the user's number of lives in the database
+    $stmt = $conn->prepare("UPDATE player SET numLives=? WHERE username=?");
+    if (!$stmt) {
+        printf("Error: %s\n", $conn->error);
+        exit();
+    }
+    $stmt->bind_param("is", $numLives, $username);
+    $stmt->execute();
+    $stmt->close();
 
     // close the database connection
     mysqli_close($conn);
 }
 
-function check_game_over() {
+function check_game_over()
+{
     // check if the user has any lives left
     if ($_SESSION['numLives'] <= 0) {
         // user has lost the game
         echo "Game over!";
         // end the session
         session_destroy();
-        header("Location: index.php");
-        exit;
-    }
-}
-
-// function to decrement the number of lives by 1 each time the user loses the gamefunction decrement_lives() {
-    function decrement_lives() {
-        if (isset($_SESSION['numLives'])) {
-            $_SESSION['numLives'] -= 1;
-            $username = $_SESSION['username'];
-            $numLives = $_SESSION['numLives'];
-            // update the numLives value in the database
-            $conn = mysqli_connect("localhost", "root", "", "kidsGames");
-            $stmt = $conn->prepare("UPDATE player SET numLives=? WHERE username=?");
-            if (!$stmt) {
-                printf("Error: %s\n", $conn->error);
-                exit();
-            }
-            $stmt->bind_param("is", $numLives, $username);
-            $stmt->execute();
-            $stmt->close();
-        }
+        header("Location: login.php");
+        exit();
     }
     
+}
+
+function decrement_lives()
+{
+    if (isset($_SESSION['numLives'])) {
+        $_SESSION['numLives'] -= 1;
+        $username = $_SESSION['username'];
+        $numLives = $_SESSION['numLives'];
+        // update the numLives value in the database
+        $conn = mysqli_connect("localhost", "root", "", "kidsGames");
+        $stmt = $conn->prepare("UPDATE player SET numLives=? WHERE username=?");
+        if (!$stmt) {
+            printf("Error: %s\n", $conn->error);
+            exit();
+        }
+        $stmt->bind_param("is", $numLives, $username);
+        $stmt->execute();
+        $stmt->close();
+        // close the database connection
+        mysqli_close($conn);
+    }
+}

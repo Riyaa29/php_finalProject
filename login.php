@@ -47,6 +47,11 @@ if (isset($_POST['connect'])) {
     header('Location: registration.php');
     exit();
 }
+else if (isset($_POST['homepage'])) {
+    // Redirect to the Home page
+    header('Location: index.php');
+    exit();
+}
 
 // Close the database connection
 $conn->close();
@@ -71,6 +76,7 @@ $conn->close();
             <div class="form-buttons">
                 <input type="submit" name="connect" value="Connect">
                 <input type="submit" name="signup" value="Sign Up" href="registration.php">
+                <input type="submit" name="homepage" value="Home Page" href="index.php">
             </div>
         </form>
 
