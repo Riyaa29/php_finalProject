@@ -10,14 +10,13 @@ if (isset($_POST['modify'])) {
   if ($new_password != $confirm_new_password) {
     echo "Passwords do not match.";
   } else {
-    // Code to update the user's password in the database
-    $host = "localhost";
+    // Connect to the database
+    $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "kidsgames";
+    $dbname = "kidsgames";
 
-    // Create connection
-    $conn = mysqli_connect($host, $username, $password, $database);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
     if (!$conn) {
@@ -25,21 +24,25 @@ if (isset($_POST['modify'])) {
     }
 
     // Update password in the players table
-    $sql = "UPDATE players SET password='$new_password' WHERE username='$existing_username'";
+    $sql = "UPDATE player SET password='$new_password' WHERE username='$existing_username'";
 
     if (mysqli_query($conn, $sql)) {
-      echo "Password updated successfully!";
+      echo "<p style='color: black;'>Password updated successfully!</p>";
     } else {
       echo "Error updating password: " . mysqli_error($conn);
     }
 
     mysqli_close($conn);
   }
-} else if (isset($_POST['sign-in'])) {
+} 
+if (isset($_POST['sign-in'])) {
   // Redirect the user to the login form
-  header("Location: login-form.php");
-  exit();
+  ob_start();
+  header("Location: login.php");
+  ob_end_flush();
+  die();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +53,7 @@ if (isset($_POST['modify'])) {
   <title>Password Modification Form</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
     <h1>Password Modification Form</h1>

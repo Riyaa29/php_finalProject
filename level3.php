@@ -214,6 +214,7 @@
                     // if there are no more lives, end the game
                     echo "<p>Game Over. You have run out of lives.</p>";
                     echo "<p>The correct answer was: " . implode("", $original_numbers) . "</p>";
+                    check_fail();
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     check_game_over();

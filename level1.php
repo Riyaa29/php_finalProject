@@ -215,28 +215,25 @@
                     // if there are no more lives, end the game
                     echo "<p>Game Over. You have run out of lives.</p>";
                     echo "<p>The correct answer was: " . implode("", $original_letters) . "</p>";
+                    check_fail();
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     check_game_over();
                     echo "<button onclick=\"location.href='index.php';\">Home Page</button>";
                     echo "<button onclick=\"location.href='level1.php';\">Play Again</button>";
                     echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
-                
+
                 } else if (isset($_POST['playAgain'])) {
                     // if the user has no lives left and clicks "Play Again"
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     header("Location: level1.php"); // start a new game
-                }
-                else {
+                } else {
                     // if there are remaining lives, allow the player to guess again
                     $diff_letters = array_diff($ordered_letters, $original_letters);
                     if (count($diff_letters) == count($ordered_letters)) {
                         // if all the numbers or letters entered are different (not similar) than the ones displayed
                         echo "<p>Incorrect - All your letters are different than ours</p>";
-                    } elseif (count($diff_letters) == 0) {
-                        // if all the numbers or letters entered are the same displayed and their order is correct
-                        echo "<p>Correct - Your letters have been correctly ordered in ascending order.</p>";
                     } else {
                         // if some of the numbers or letters entered are different than the ones displayed
                         echo "<p>Incorrect - Some of your letters are different than ours</p>";

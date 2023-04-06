@@ -230,6 +230,7 @@
                     echo "<p>Game Over. You have run out of lives.</p>";
                     echo "<p>The correct First letter was : " . implode("", [$original_last_letter]) . "</p>";
                     echo "<p>The correct Last letter was : " . implode("", [$original_first_letter]) . "</p>";
+                    check_fail();
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     check_game_over();

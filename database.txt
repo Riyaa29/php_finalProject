@@ -1,0 +1,19 @@
+DROP DATABASE kidsgames;
+CREATE DATABASE kidsGames;
+
+USE kidsGames;
+CREATE TABLE player (
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    numLives INTEGER DEFAULT 6,
+    registration_time DATETIME NOT NULL,
+    session_time DATETIME NOT NULL,
+    result varchar(20) DEFAULT 'incomplete',
+    user_id VARCHAR(200) GENERATED ALWAYS AS (CONCAT(UPPER(LEFT(full_name,2)),CAST(registration_time AS SIGNED))),
+    registration_order INTEGER AUTO_INCREMENT,
+    PRIMARY KEY (registration_order)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+

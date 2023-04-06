@@ -203,7 +203,10 @@
             // check if the letters entered are correct
             if ($user_minimum_number === $original_minimum_number && $user_maximum_number === $original_maximum_number) {
                 echo "<p>Correct - You have identified the minimum and maximum numbers of the set.</p>";
-                echo "<p>You have won the game with " . $_SESSION['numLives'] . " lives remaining.</p>";                
+                echo "<p>You have won the game with " . $_SESSION['numLives'] . " lives remaining.</p>";     
+                check_pass();      
+                $_SESSION['numLives'] = 6; // reset lives to 6
+                update_lives($_SESSION['username'], $_SESSION['numLives']);     
                 // pass the updated numLives value to the next page
                 $numLives = $_SESSION['numLives'] ?? '';
                 if (isset($_SESSION['level']) && $_SESSION['level'] < 6) {
@@ -230,6 +233,7 @@
                     echo "<p>Game Over. You have run out of lives.</p>";
                     echo "<p>The correct Minimum Number was : " . implode("", [$original_maximum_number]) . "</p>";
                     echo "<p>The correct Maximum Number was : " . implode("", [$original_minimum_number]) . "</p>";
+                    check_fail();
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     check_game_over();
@@ -248,8 +252,10 @@
                         // if the guess is correct, display a success message
                         echo "<p>Correct - You have identified the minimum and maximum numbers of the set.</p>";
                         echo "<p>You have won the game with " . $_SESSION['numLives'] . " lives remaining.</p>";
+                        check_pass();
                         $_SESSION['numLives'] = 6; // reset lives to 6
                         update_lives($_SESSION['username'], $_SESSION['numLives']);
+                        
                         echo "<button onclick=\"location.href='index.php';\">Home Page</button>";
                         echo "<button onclick=\"location.href='level1.php';\">Play Again</button>";
                         echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";

@@ -51,20 +51,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($error_empty) && empty($error_username) && empty($error_password) && empty($error_confirm_password)) {
-    $query = "INSERT INTO player (username, email, password, full_name, phone_number) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO player (username, email, password, full_name, phone_number, numLives) VALUES (?, ?, ?, ?, ?, 6)";
     $stmt = mysqli_prepare($conn, $query);
     if ($stmt === false) {
       die("mysqli_prepare() failed: " . mysqli_error($conn));
     }
-    else{
-      echo "User has been registered!";
+    else{      
+     
+        // Registration successful
+        echo "User has been registered!";
+        
+        // Display login button
+        echo '<button onclick="location.href=\'login.php\'">Login</button>';
       
+      
+    
     }
-    // // Hash the password
-    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    // if ($hashed_password === false) {
-    //   die("Password hash failed.");
-    // }
+
 
     mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $password, $full_name, $phone_number);
     if (mysqli_stmt_execute($stmt)) {

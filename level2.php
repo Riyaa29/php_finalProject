@@ -216,6 +216,7 @@ if (isset($_POST['submit'])) {
             // if there are no more lives, end the game
             echo "<p>Game Over. You have run out of lives.</p>";
             echo "<p>The correct answer was: " . implode("", $original_letters) . "</p>";
+            check_fail();
             $_SESSION['numLives'] = 6; // reset lives to 6
             update_lives($_SESSION['username'], $_SESSION['numLives']);
             check_game_over();
@@ -235,9 +236,6 @@ if (isset($_POST['submit'])) {
             if (count($diff_letters) == count($ordered_letters)) {
                 // if all the letters entered are different than the ones displayed
                 echo "<p>Incorrect - All your letters are different than ours</p>";
-            } elseif (count($diff_letters) == 0) {
-                // if all the numbers or letters entered are the same displayed and their order is correct
-                echo "<p>Correct - Your letters have been correctly ordered in descending order.</p>";
             } else {
                 // if some of the numbers or letters entered are different than the ones displayed
                 echo "<p>Incorrect - Some of your letters are different than ours</p>";
