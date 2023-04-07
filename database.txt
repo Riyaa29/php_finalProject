@@ -1,3 +1,11 @@
+// Connect to database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "kidsgames";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
 DROP DATABASE kidsgames;
 CREATE DATABASE kidsGames;
 

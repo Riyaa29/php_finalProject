@@ -1,7 +1,8 @@
 <?php
 
-function initialize_session() {
-    
+function initialize_session()
+{
+
     // connect to the database
     $conn = mysqli_connect("localhost", "root", "", "kidsGames");
 
@@ -25,12 +26,11 @@ function initialize_session() {
         // fetch the results and store them in the session
         $row = mysqli_fetch_assoc($result);
         $_SESSION['numLives'] = $row['numLives'];
-    } 
-        else {
+    } else {
         // set the default number of lives to 6
         $_SESSION['numLives'] = 6;
     }
-    
+
     // close the database connection
     mysqli_close($conn);
 }
@@ -98,7 +98,7 @@ function check_game_over()
     if ($result === false) {
         die("Query failed: " . mysqli_error($conn));
     }
-    
+
 }
 
 function decrement_lives()
@@ -130,14 +130,14 @@ function check_fail()
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-                    $username = $_SESSION['username'];
-                    $sql = "Update player SET result='fail' WHERE username='$username'";
-                    $result = mysqli_query($conn, $sql);
+    $username = $_SESSION['username'];
+    $sql = "Update player SET result='fail' WHERE username='$username'";
+    $result = mysqli_query($conn, $sql);
 
-                    // check if the query execution was successful
-                    if ($result === false) {
-                        die("Query failed: " . mysqli_error($conn));
-                    }
+    // check if the query execution was successful
+    if ($result === false) {
+        die("Query failed: " . mysqli_error($conn));
+    }
 }
 function check_pass()
 {
@@ -147,12 +147,38 @@ function check_pass()
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-                    $username = $_SESSION['username'];
-                    $sql = "Update player SET result='pass' WHERE username='$username'";
-                    $result = mysqli_query($conn, $sql);
+    $username = $_SESSION['username'];
+    $sql = "Update player SET result='pass' WHERE username='$username'";
+    $result = mysqli_query($conn, $sql);
 
-                    // check if the query execution was successful
-                    if ($result === false) {
-                        die("Query failed: " . mysqli_error($conn));
-                    }
+    // check if the query execution was successful
+    if ($result === false) {
+        die("Query failed: " . mysqli_error($conn));
+    }
+}
+
+function generate_random_letters($num)
+{
+    $letters = array();
+    for ($i = 0; $i < $num; $i++) {
+        $letter = chr(rand(97, 122));
+        while (in_array($letter, $letters)) {
+            $letter = chr(rand(97, 122));
+        }
+        $letters[] = $letter;
+    }
+    return $letters;
+}
+
+function generate_random_numbers($num)
+{
+    $numbers = array();
+    for ($i = 0; $i < $num; $i++) {
+        $number = rand(0, 100);
+        while (in_array($number, $numbers)) {
+            $number = rand(0, 100);
+        }
+        $numbers[] = $number;
+    }
+    return $numbers;
 }

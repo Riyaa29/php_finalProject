@@ -3,137 +3,7 @@
 
 <head>
     <title>Game Level 2: Order letters in descending order</title>
-    <style>
-        /* set background color */
-        body {
-            background-image: url('https://img.freepik.com/free-vector/black-wallpaper-with-motion-lines-background_1017-30151.jpg?w=360');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: auto;
-        }
-
-
-        /* style container */
-        .container {
-            margin: 0 auto;
-            width: 60%;
-            text-align: center;
-            background-image: url('https://i.pinimg.com/originals/00/e8/57/00e857a3c087bfcc085119e0e0aef8e8.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            animation: pulse 4s ease-in-out infinite;
-            padding: 50px;
-            position: absolute;
-            top: 20%;
-            left: 15%;
-            transform: translate(-50%, -50%);
-            border-radius: 20px;
-        }
-
-
-
-        /* style user info */
-        .user-info {
-            margin-bottom: 20px;
-        }
-
-        /* style h1 */
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-        }
-
-        /* style p */
-        p {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-        }
-
-        /* style form */
-        form {
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        /* style input fields */
-        input[type="text"] {
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 2px solid #ccc;
-            box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.2s ease-in-out;
-        }
-
-        /* animate input fields on focus */
-        input[type="text"]:focus {
-            border-color: #0099ff;
-        }
-
-        /* style submit button */
-        input[type="submit"] {
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #0099ff;
-            color: #fff;
-            border: none;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.2s ease-in-out;
-        }
-
-        /* animate submit button on hover */
-        input[type="submit"]:hover {
-            background-color: #007acc;
-        }
-
-        /* style result message */
-        .result-message {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-        }
-
-        /* style button */
-        button {
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #0099ff;
-            color: #fff;
-            border: none;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.2s ease-in-out;
-            margin-right: 10px;
-        }
-
-        /* animate button on hover */
-        button:hover {
-            background-color: #007acc;
-        }
-
-        /* pulse animation */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="levelstyle.css">
 </head>
 
 <body>
@@ -149,22 +19,10 @@
         <p>A set of 6 different letters generated randomly is shown below. Please use the form to write them in
             descending
             order (from z to a).</p>
-        <?php
-        // include the session_helper.php file
+            <?php
         include 'session-helper.php';
-        // call the initialize_session() function to initialize the session variables
         initialize_session();
-
-        // generate 6 random letters
-        $letters = array();
-        for ($i = 0; $i < 6; $i++) {
-            $letter = chr(rand(97, 122)); // generate a random lowercase letter
-            while (in_array($letter, $letters)) { // make sure the letter is not repeated
-                $letter = chr(rand(97, 122));
-            }
-            $letters[] = $letter;
-        }
-
+        $letters = generate_random_letters(6);
         ?>
 
         <p><strong>Letters to order:</strong>
