@@ -18,12 +18,12 @@
         <h1>Level 5: Identify first and last letters</h1>
         <p>A set of 6 different letters generated randomly is shown below. Please use the form to write the first letter
             and
-            the last letter (in alphabetical order).</p>
-            <?php
+            the last letter (in alphabetical order). </p>
+        <?php
         include 'session-helper.php';
         initialize_session();
         $letters = generate_random_letters(6);
-        
+
         // get the first and last letter of the set
         $first_letter = min($letters);
         $last_letter = max($letters);
@@ -108,22 +108,21 @@
                         echo "<p>Incorrect. You have " . $_SESSION['numLives'] . " lives remaining.</p>";
                         echo "<p>Guess again!</p>";
 
-                    }
-                    else if ($user_first_letter !== $original_first_letter && $user_last_letter === $original_last_letter) {
+                    } else if ($user_first_letter !== $original_first_letter && $user_last_letter === $original_last_letter) {
                         // if the guess has no correct letters, display a failure message
                         echo "<p>The first letter you entered is incorrect! </p>";
                         echo "<p>Incorrect. You have " . $_SESSION['numLives'] . " lives remaining.</p>";
                         echo "<p>Guess again!</p>";
+                    } else if ($user_first_letter === $original_first_letter && $user_last_letter !== $original_last_letter) {
+                        // if the guess has no correct letters, display a failure message
+                        echo "<p>The last letter you entered is incorrect! </p>";
+                        echo "<p>Incorrect. You have " . $_SESSION['numLives'] . " lives remaining.</p>";
+                        echo "<p>Guess again!</p>";
+                        echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
+                    }
                 }
-                else if ($user_first_letter === $original_first_letter && $user_last_letter !== $original_last_letter) {
-                    // if the guess has no correct letters, display a failure message
-                    echo "<p>The last letter you entered is incorrect! </p>";
-                    echo "<p>Incorrect. You have " . $_SESSION['numLives'] . " lives remaining.</p>";
-                    echo "<p>Guess again!</p>";
-            }
             }
         }
-    }
         ?>
 
     </div>

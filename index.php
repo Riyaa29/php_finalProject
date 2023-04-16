@@ -5,120 +5,120 @@
   <meta charset="UTF-8">
   <title>Order Quest</title>
   <style>
-  /* basic styling */
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-  }
+    /* basic styling */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+    }
 
-  header,
-  footer {
-    background-color: #212529;
-    color: white;
-    padding: 10px;
-  }
+    header,
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 10px;
+    }
 
-  nav {
-    background-color: #495057;
-    color: white;
-    padding: 10px;
-  }
+    nav {
+      background-color: #495057;
+      color: white;
+      padding: 10px;
+    }
 
-  article {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+    article {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
-  /* navigation links */
-  nav a {
-    display: inline-block;
-    color: white;
-    margin-right: 10px;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
+    /* navigation links */
+    nav a {
+      display: inline-block;
+      color: white;
+      margin-right: 10px;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
 
-  nav a:hover {
-    background-color: #212529;
-  }
+    nav a:hover {
+      background-color: #212529;
+    }
 
-  /* form labels */
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #212529;
-  }
+    /* form labels */
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #212529;
+    }
 
-  /* form inputs */
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-    color: #212529;
-  }
+    /* form inputs */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+      color: #212529;
+    }
 
-  input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
 
-  input[type="submit"]:hover {
-    background-color: #0069d9;
-  }
+    input[type="submit"]:hover {
+      background-color: #0069d9;
+    }
 
-  /* form errors */
-  .error {
-    color: red;
-    font-style: italic;
-    margin-bottom: 10px;
-  }
+    /* form errors */
+    .error {
+      color: red;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
 
-  /* game summary */
-  .game-summary {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+    /* game summary */
+    .game-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-  .game-summary img {
-    width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-  }
+    .game-summary img {
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
 
-  .game-summary h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
+    .game-summary h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
 
-  .game-summary p {
-    font-size: 18px;
-    text-align: justify;
-    line-height: 1.5;
-    max-width: 800px;
-    margin-bottom: 10px;
-  }
-</style>
+    .game-summary p {
+      font-size: 18px;
+      text-align: justify;
+      line-height: 1.5;
+      max-width: 800px;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 
 <body>

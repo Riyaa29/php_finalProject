@@ -18,8 +18,8 @@
         <h1>Level 3: Order numbers in ascending order</h1>
         <p>A set of 6 different numbers generated randomly is shown below. Please use the form to write them in
             ascending
-            order (from smallest to largest).</p>
-            <?php
+            order (from smallest to largest). Separate each number with a comma (e.g., 1,2,23,45,9,90).</p>
+        <?php
         include 'session-helper.php';
         initialize_session();
         $numbers = generate_random_numbers(6);
@@ -65,8 +65,7 @@
                         check_game_over();
                     }
                 }
-            }
-            else {
+            } else {
                 // decrease numLives by 1
                 decrement_lives();
 
@@ -81,14 +80,13 @@
                     echo "<button onclick=\"location.href='index.php';\">Home Page</button>";
                     echo "<button onclick=\"location.href='level1.php';\">Play Again</button>";
                     echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
-                
+
                 } else if (isset($_POST['playAgain'])) {
                     // if the user has no lives left and clicks "Play Again"
                     $_SESSION['numLives'] = 6; // reset lives to 6
                     update_lives($_SESSION['username'], $_SESSION['numLives']);
                     header("Location: level1.php"); // start a new game
-                }
-                else {
+                } else {
                     // if there are remaining lives, allow the player to guess again
                     $diff_numbers = array_diff($ordered_numbers, $original_numbers);
                     if (count($diff_numbers) == count($ordered_numbers)) {
@@ -103,11 +101,12 @@
                     }
                     echo "<p>You have " . $_SESSION['numLives'] . " lives remaining.</p>";
                     echo "<p>Guess again!</p>";
+                    echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
                 }
             }
         }
         ?>
-        
+
 </body>
 
 

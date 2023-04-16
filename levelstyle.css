@@ -1,12 +1,21 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     background-image: url('https://img.freepik.com/free-photo/grunge-paint-background_1409-1337.jpg?w=1060&t=st=1680824172~exp=1680824772~hmac=16765c3603c84e698a629e2c30c3fb7bfaf64e068f511c283017f9fd956cae2a');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: auto;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .container {
-    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 60%;
     text-align: center;
     background-image: url('https://t3.ftcdn.net/jpg/01/91/78/32/240_F_191783282_0TVrx5VrvrkpDHSKdjjI87HkbXJy5TMw.jpg');
@@ -15,11 +24,8 @@ body {
     background-position: center;
     animation: pulse 4s ease-in-out infinite;
     padding: 50px;
-    position: absolute;
-    top: 20%;
-    left: 15%;
-    transform: translate(-50%, -50%);
     border-radius: 20px;
+    box-sizing: border-box;
 }
 
 .user-info {

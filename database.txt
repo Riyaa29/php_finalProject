@@ -25,3 +25,11 @@ CREATE TABLE player (
     PRIMARY KEY (registration_order)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+ALTER TABLE player
+ADD COLUMN session_id INT AUTO_INCREMENT,
+ADD COLUMN start_time DATETIME,
+ADD COLUMN end_time DATETIME,
+ADD COLUMN result ENUM('win', 'lose', 'incomplete') DEFAULT 'incomplete',
+ADD COLUMN lives_remaining INT DEFAULT 6,
+ADD PRIMARY KEY (session_id);
+

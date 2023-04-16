@@ -17,9 +17,9 @@
             ?>
         </div>
         <h1>Level 6: Identify the minimum and the maximum number</h1>
-        <p>A set of 6 different letters generated randomly is shown and the user must use the form available 
-            to write the minimum number and the maximum number (from the order 0 to 100).</p>
-            <?php
+        <p>A set of 6 different letters generated randomly is shown and the user must use the form available
+            to write the minimum number and the maximum number (from the order 0 to 100). </p>
+        <?php
         include 'session-helper.php';
         initialize_session();
         $numbers = generate_random_numbers(6);
@@ -59,10 +59,10 @@
             // check if the letters entered are correct
             if ($user_minimum_number === $original_minimum_number && $user_maximum_number === $original_maximum_number) {
                 echo "<p>Correct - You have identified the minimum and maximum numbers of the set.</p>";
-                echo "<p>You have won the game with " . $_SESSION['numLives'] . " lives remaining.</p>";     
-                check_pass();      
+                echo "<p>You have won the game with " . $_SESSION['numLives'] . " lives remaining.</p>";
+                check_pass();
                 $_SESSION['numLives'] = 6; // reset lives to 6
-                update_lives($_SESSION['username'], $_SESSION['numLives']);     
+                update_lives($_SESSION['username'], $_SESSION['numLives']);
                 // pass the updated numLives value to the next page
                 $numLives = $_SESSION['numLives'] ?? '';
                 if (isset($_SESSION['level']) && $_SESSION['level'] < 6) {
@@ -111,7 +111,7 @@
                         check_pass();
                         $_SESSION['numLives'] = 6; // reset lives to 6
                         update_lives($_SESSION['username'], $_SESSION['numLives']);
-                        
+
                         echo "<button onclick=\"location.href='index.php';\">Home Page</button>";
                         echo "<button onclick=\"location.href='level1.php';\">Play Again</button>";
                         echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
@@ -130,6 +130,7 @@
                         echo "<p>The last number you entered is incorrect! </p>";
                         echo "<p>Incorrect. You have " . $_SESSION['numLives'] . " lives remaining.</p>";
                         echo "<p>Guess again!</p>";
+                        echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
                     }
                 }
             }

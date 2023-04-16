@@ -18,6 +18,8 @@ $error_full_name = "";
 $error_phone_number = "";
 $registration_successful = false;
 
+
+
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -78,30 +80,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_confirm_password = "Passwords do not match.";
   }
 
-// Check if there are any errors
-if (empty($error_username) && empty($error_email) && empty($error_password) && empty($error_confirm_password) && empty($error_full_name) && empty($error_phone_number)) {
-  // All inputs are valid, insert new user into database
-  $query = "INSERT INTO player (username, email, password, full_name, phone_number, numLives) VALUES (?, ?, ?, ?, ?, 6)";
-  $stmt = mysqli_prepare($conn, $query);
-  if ($stmt === false) {
-    die("mysqli_prepare() failed: " . mysqli_error($conn));
-  }
+  // Check if there are any errors
+  if (empty($error_username) && empty($error_email) && empty($error_password) && empty($error_confirm_password) && empty($error_full_name) && empty($error_phone_number)) {
+    // All inputs are valid, insert new user into database
+    $query = "INSERT INTO player (username, email, password, full_name, phone_number, numLives, registration_time, session_time) VALUES (?, ?, ?, ?, ?, 6, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    if ($stmt === false) {
+      die("mysqli_prepare() failed: " . mysqli_error($conn));
+    }
 
-  // Bind parameters
-  mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $password, $full_name, $phone_number);
-  if (mysqli_stmt_execute($stmt)) {
-    // Set registration successful flag
-    $registration_successful = true;
-    echo '<script>document.getElementById("success-message").style.display = "block";</script>';
-  } else {
-    echo "Error executing statement: " . mysqli_error($conn);
-  }
+    // Bind parameters
+    $registration_time = date("Y-m-d H:i:s");
+    $session_time = $registration_time;
+    mysqli_stmt_bind_param($stmt, "sssssss", $username, $email, $password, $full_name, $phone_number, $registration_time, $session_time);
+        if (mysqli_stmt_execute($stmt)) {
+      // Set registration successful flag
+      $registration_successful = true;
+      echo '<script>document.getElementById("success-message").style.display = "block";</script>';
+    } else {
+      echo "Error executing statement: " . mysqli_error($conn);
+    }
 
-  mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt);
+  }
+  mysqli_close($conn);
+
 }
-mysqli_close($conn);
-
-  }
 
 ?>
 
@@ -154,44 +158,43 @@ mysqli_close($conn);
     }
 
     #success-message {
-        text-align: center;
-        color: black;
+      text-align: center;
+      color: black;
     }
 
     #success-message button {
-        background-color: #0077be;
-        color: #ffffff;
-        border: none;
-        padding: 12px 24px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition-duration: 0.4s;
+      background-color: #0077be;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition-duration: 0.4s;
     }
 
     #success-message button:hover {
-        background-color: #005ea6;
-        color: #ffffff;
+      background-color: #005ea6;
+      color: #ffffff;
     }
-    
   </style>
 </head>
 
 <body>
-<div id="success-message" style="display:none;">
-  <p>User has been registered!</p>
-  <button onclick="goToLoginPage()">Go to Login Page</button>
-  <button onclick="goToHomePage()">Go to Home Page</button>
-</div>
+  <div id="success-message" style="display:none;">
+    <p>User has been registered!</p>
+    <button onclick="goToLoginPage()">Go to Login Page</button>
+    <button onclick="goToHomePage()">Go to Home Page</button>
+  </div>
 
   <div class="container registration">
     <h1>Registration</h1>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="username">Username:</label>
+      <label for="username">Username:</label>
       <input type="text" id="username" name="username" placeholder="Enter your username" required>
       <span class="error">
         <?php echo $error_username; ?>
@@ -241,9 +244,9 @@ mysqli_close($conn);
       <input type="submit" value="Register">
     </form>
   </div>
-    </form>
+  </form>
   </div>
- 
+
 
   <script>
     document.querySelector('.toggle-password').addEventListener('click', function () {
@@ -259,7 +262,7 @@ mysqli_close($conn);
       window.location.href = "login.php";
     }
     function goToHomePage() {
-      window.location.href = "index.php"; 
+      window.location.href = "index.php";
     }
 
     // Show success message if registration was successful

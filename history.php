@@ -22,6 +22,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>History</title>
   <style>
@@ -80,6 +81,7 @@ $conn->close();
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>History</h1>
@@ -93,10 +95,11 @@ $conn->close();
       </tr>
       <?php
       while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row['user_id']."</td><td>".$row['full_name']."</td><td>".$row['result']."</td><td>".$row['numLives']."</td><td>".$row['session_time']."</td></tr>";
+        echo "<tr><td>" . $row['user_id'] . "</td><td>" . $row['full_name'] . "</td><td>" . $row['result'] . "</td><td>" . $row['numLives'] . "</td><td>" . $row['session_time'] . "</td></tr>";
       }
       ?>
     </table>
   </div>
 </body>
+
 </html>

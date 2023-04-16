@@ -17,7 +17,7 @@
         <h1>Level 1: Order letters in ascending order</h1>
         <p>A set of 6 different letters generated randomly is shown below. Please use the form to write them in
             ascending
-            order (from a to z).</p>
+            order (from a to z). Enter letters without a comma or a space (e.g., abcdef).</p>
         <?php
         include 'session-helper.php';
         initialize_session();
@@ -98,6 +98,7 @@
                     }
                     echo "<p>You have " . $_SESSION['numLives'] . " lives remaining.</p>";
                     echo "<p>Guess again!</p>";
+                    echo "<button onclick=\"location.href='login.php';\">Sign Out</button>";
 
                 }
             }
